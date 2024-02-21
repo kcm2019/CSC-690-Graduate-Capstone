@@ -6,6 +6,9 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
+import time
+
+start_time = time.time()
 
 """ YOUTUBE LINK: https://www.youtube.com/watch?v=4HfSfFvLn9Q
     PIP INSTALL: pip3 install langchain beautifulsoup4 chromadb gradio
@@ -49,3 +52,7 @@ def rag_chain(question):
 # Use the RAG chain
 result = rag_chain("Tell me something about Adelphi")
 print(result)
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+print(f"Script execution time: {elapsed_time:.2f} seconds")
