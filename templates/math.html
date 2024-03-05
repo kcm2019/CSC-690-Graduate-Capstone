@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Calculator</title>
+</head>
+<body>
+    <h1>Flask Calculator</h1>
+    <form id="calcForm" method="post">
+        <input type="text" name="numbers" id="numbers" placeholder="Enter two numbers separated by space" onkeydown="handleKeyPress(event)">
+        <button type="button" onclick="calculate()">Calculate</button>
+    </form>
+    <div id="history">
+        <h2>History</h2>
+        <ul id="historyList">
+            {% for nums in history %}
+                <li>{{ nums[0] }} + {{ nums[1] }} = {{ nums[2] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        function calculate() {
+            var numbers = document.getElementById('numbers').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    document.getElementById('historyList').innerHTML += '<li>' + numbers + ' = ' + data.result + '</li>';
+                    document.getElementById('numbers').value = '';
+                }
+            };
+            xhr.send('numbers=' + numbers);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                calculate(); // Trigger calculate function when Enter key is pressed
+            }
+        }
+    </script>
+</body>
+</html>
