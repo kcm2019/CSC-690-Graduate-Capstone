@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        .loading {
+            display: none;
+            width: 100%;
+            height: 4px;
+            background-color: #ddd;
+            position: relative;
+        }
+
+        .loading:before {
+            content: '';
+            display: block;
+            width: 20%;
+            height: 100%;
+            background-color: #4caf50;
+            position: absolute;
+            animation: loading-bar 2s infinite;
+        }
+
+        @keyframes loading-bar {
+            0% {
+                left: 0%;
+                width: 20%;
+            }
+            50% {
+                left: 50%;
+                width: 30%;
+            }
+            100% {
+                left: 100%;
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat</h1>
+    <form id="chatForm" onsubmit="sendMessage(event)">
+        <input type="text" name="query" id="query" placeholder="Enter your query">
+        <button type="submit">Send</button>
+    </form>
+    <div id="chatHistory">
+        <!-- Chat history will be displayed here -->
+    </div>
+    <div id="loadingBar" class="loading"></div>
+
+    <script>
+        function sendMessage(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            
+            var query = document.getElementById('query').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    var chatHistory = document.getElementById('chatHistory');
+                    chatHistory.innerHTML += '<p><strong>You:</strong> ' + data.query + '</p>';
+                    chatHistory.innerHTML += '<p><strong>Bot:</strong> ' + data.response + '</p>';
+                    chatHistory.innerHTML += '<p><strong>Response Time:</strong> ' + data.query_time + ' seconds</p>';
+                    document.getElementById('query').value = ''; // Clear the input field after sending the query
+                    document.getElementById('loadingBar').style.display = 'none'; // Hide loading bar after response
+                }
+            };
+            xhr.send('query=' + query);
+            document.getElementById('loadingBar').style.display = 'block'; // Show loading bar while waiting for response
+        }
+    </script>
+</body>
+</html>
