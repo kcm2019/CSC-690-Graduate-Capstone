@@ -15,7 +15,7 @@ def count_tokens(document):
     return token_count
 
 # Read the input from a text file
-file_path = "test.txt"  # Replace with your file path
+file_path = "adelphidata.txt"  # Replace with your file path
 with open(file_path, "r", encoding="utf-8") as file:
     documents = file.readlines()
 

@@ -1,0 +1,23 @@
+Time is in seconds
+
+Vector Store Creation:
+500 Context Size
+
+1000 Context Size:
+
+1500 Context Size:
+
+2000 Context Size:
+
+3000 Conext Size: 148, 152, 151, 160, 151
+
+Query Time:
+500 Context Size
+
+1000 Context Size:
+
+1500 Context Size:
+
+2000 Context Size:
+
+3000 Conext Size: 
