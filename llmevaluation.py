@@ -10,7 +10,7 @@ from langchain.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
 from flask import jsonify
 
-# Function to print execution time
+# Function to print execution timeh
 def print_execution_time(message, start_time):
     end_time = time.time()
     elapsed_time = end_time - start_time
