@@ -1,4 +1,3 @@
-@ -1,35 +0,0 @@
 # AdelphiLM: An AI Chatbot for Adelphi University
 
 This project aims to develop AdelphiLM, an advanced chatbot for Adelphi University that can answer user queries directly, drawing information from the university's website.
