@@ -50,7 +50,7 @@ def create_vector_store(text_chunks, embeddings):
 # Function to create LLMS model
 def create_llms_model():
     start_time = time.time()
-    llm = CTransformers(model="/home/kurtmuller/Documents/Projects/AIJobInterviewPrepBot-master/mistral-7b-instruct-v0.1.Q4_K_M.gguf", config={'max_new_tokens': 1000, 'temperature': 0.01, 'context_length': 2048})
+    llm = CTransformers(model="/path/to/file/mistral-7b-instruct-v0.1.Q4_K_M.gguf", config={'max_new_tokens': 1000, 'temperature': 0.01, 'context_length': 2048})
     print_execution_time("\nCreated LLM", start_time)
     return llm
 
